@@ -1,10 +1,8 @@
 import base64
-import io
 from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
-from PIL import Image
 
 # ------------------------------------------------------------------
 # 기본 설정
@@ -32,7 +30,6 @@ BASE_DIR = Path(__file__).parent
 HTML_PATH = BASE_DIR / "index.html"
 # 히어로 배경으로 쓸 고화질 와이드 이미지
 IMAGE_PATH = BASE_DIR / "분자사진고화질.png"
-JPEG_QUALITY = 85  # 화질 손실을 최소화하면서 용량을 줄이기 위한 값
 
 
 @st.cache_data(show_spinner=False)
@@ -44,14 +41,11 @@ def load_html() -> str:
     # 상대경로 파일을 불러올 수 없어, 이미지를 base64로 인코딩해
     # HTML 안에 직접 삽입(data URI)해줍니다.
     #
-    # 원본 PNG(약 1.7MB)를 그대로 넣으면 페이지가 무거워지므로,
-    # 화질 저하가 거의 없는 수준(quality=85)의 JPEG로 변환해 용량을 줄입니다.
+    # 히어로에 더 이상 블러를 걸지 않고 원본 화질 그대로 보여주므로,
+    # 손실 압축(JPEG 재인코딩) 없이 원본 PNG 바이트를 그대로 삽입합니다.
     if IMAGE_PATH.exists():
-        img = Image.open(IMAGE_PATH).convert("RGB")
-        buf = io.BytesIO()
-        img.save(buf, format="JPEG", quality=JPEG_QUALITY, optimize=True)
-        img_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
-        data_uri = f"data:image/jpeg;base64,{img_b64}"
+        img_b64 = base64.b64encode(IMAGE_PATH.read_bytes()).decode("utf-8")
+        data_uri = f"data:image/png;base64,{img_b64}"
         html = html.replace('url("분자사진2.jpg")', f'url("{data_uri}")')
 
     return html
