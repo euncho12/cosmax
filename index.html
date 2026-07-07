@@ -579,7 +579,8 @@
     flex-wrap: wrap;
   }
 
-  .feed-images img {
+  .feed-images img,
+  .feed-images svg.feed-chart {
     flex: 1 1 160px;
     min-width: 0;
     max-height: 220px;
@@ -588,6 +589,48 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 6px;
+  }
+
+  .feed-chart-legend {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--text-sub);
+  }
+
+  .feed-chart-legend .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ---------- Example card ---------- */
+  .example-header .date-label {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .example-item {
+    border-style: dashed;
+    border-color: var(--accent);
+    background: linear-gradient(180deg, var(--accent-soft) 0%, var(--card-bg) 60px);
+  }
+
+  .example-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 4px 11px;
+    letter-spacing: 0.2px;
   }
 
   .feed-file {
@@ -811,6 +854,71 @@ https://github.com/nodeca/pako/blob/main/LICENSE
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
       </button>
+    </div>
+
+    <div class="date-group example-header">
+      <div class="date-header">
+        <span class="date-label">예시</span>
+        <span class="date-count">이런 형식으로 실험 결과를 공유해보세요</span>
+        <span class="date-line"></span>
+      </div>
+      <div class="card feed-item example-item">
+        <span class="example-badge">예시 카드</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#7c8cf7,#5b6ef2)">김</div>
+        <div class="feed-body">
+          <span class="feed-name">김도현</span>
+          <span class="feed-exp-title">고온(45℃) 안정성 테스트</span>
+          <span class="feed-exp-summary">pH 변화는 Sample 1이 Control 대비 하락폭이 적어 더 안정적으로 나타남. 다만 Control의 점도는 기존 데이터와 다르게 4주차부터 크게 감소해 재시험 예정</span>
+          <div class="feed-chart-legend">
+            <span class="legend-dot" style="background:#5b6ef2"></span>Sample 1
+            <span class="legend-dot" style="background:#9aa3b8;margin-left:10px"></span>Control
+          </div>
+          <div class="feed-images">
+            <svg class="feed-chart" viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pH 변화 그래프 예시">
+              <text x="8" y="13" font-size="11" font-weight="700" fill="#1f2433">pH 변화</text>
+              <line x1="32" y1="18" x2="32" y2="168" stroke="#e5e7eb"/>
+              <line x1="32" y1="168" x2="310" y2="168" stroke="#e5e7eb"/>
+              <line x1="32" y1="55.5" x2="310" y2="55.5" stroke="#f0f1f5"/>
+              <line x1="32" y1="93" x2="310" y2="93" stroke="#f0f1f5"/>
+              <line x1="32" y1="130.5" x2="310" y2="130.5" stroke="#f0f1f5"/>
+              <text x="6" y="22" font-size="9" fill="#6b7280" text-anchor="start">6.6</text>
+              <text x="6" y="171" font-size="9" fill="#6b7280" text-anchor="start">5.8</text>
+              <polyline points="32,27 88,31 143,37 199,44 254,56 310,66" fill="none" stroke="#5b6ef2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <polyline points="32,33 88,44 143,59 199,89 254,121 310,153" fill="none" stroke="#9aa3b8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <g fill="#5b6ef2">
+                <circle cx="32" cy="27" r="2.6"/><circle cx="88" cy="31" r="2.6"/><circle cx="143" cy="37" r="2.6"/><circle cx="199" cy="44" r="2.6"/><circle cx="254" cy="56" r="2.6"/><circle cx="310" cy="66" r="2.6"/>
+              </g>
+              <g fill="#9aa3b8">
+                <circle cx="32" cy="33" r="2.6"/><circle cx="88" cy="44" r="2.6"/><circle cx="143" cy="59" r="2.6"/><circle cx="199" cy="89" r="2.6"/><circle cx="254" cy="121" r="2.6"/><circle cx="310" cy="153" r="2.6"/>
+              </g>
+              <g font-size="9" fill="#6b7280" text-anchor="middle">
+                <text x="32" y="182">0주</text><text x="88" y="182">1주</text><text x="143" y="182">2주</text><text x="199" y="182">4주</text><text x="254" y="182">8주</text><text x="310" y="182">12주</text>
+              </g>
+            </svg>
+            <svg class="feed-chart" viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="점도 변화 그래프 예시">
+              <text x="8" y="13" font-size="11" font-weight="700" fill="#1f2433">점도 변화</text>
+              <line x1="32" y1="18" x2="32" y2="168" stroke="#e5e7eb"/>
+              <line x1="32" y1="168" x2="310" y2="168" stroke="#e5e7eb"/>
+              <line x1="32" y1="55.5" x2="310" y2="55.5" stroke="#f0f1f5"/>
+              <line x1="32" y1="93" x2="310" y2="93" stroke="#f0f1f5"/>
+              <line x1="32" y1="130.5" x2="310" y2="130.5" stroke="#f0f1f5"/>
+              <text x="6" y="22" font-size="9" fill="#6b7280" text-anchor="start">13000</text>
+              <text x="6" y="171" font-size="9" fill="#6b7280" text-anchor="start">9500</text>
+              <polyline points="32,35 88,37 143,42 199,48 254,57 310,65" fill="none" stroke="#5b6ef2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <polyline points="32,39 88,50 143,63 199,82 254,112 310,151" fill="none" stroke="#9aa3b8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <g fill="#5b6ef2">
+                <circle cx="32" cy="35" r="2.6"/><circle cx="88" cy="37" r="2.6"/><circle cx="143" cy="42" r="2.6"/><circle cx="199" cy="48" r="2.6"/><circle cx="254" cy="57" r="2.6"/><circle cx="310" cy="65" r="2.6"/>
+              </g>
+              <g fill="#9aa3b8">
+                <circle cx="32" cy="39" r="2.6"/><circle cx="88" cy="50" r="2.6"/><circle cx="143" cy="63" r="2.6"/><circle cx="199" cy="82" r="2.6"/><circle cx="254" cy="112" r="2.6"/><circle cx="310" cy="151" r="2.6"/>
+              </g>
+              <g font-size="9" fill="#6b7280" text-anchor="middle">
+                <text x="32" y="182">0주</text><text x="88" y="182">1주</text><text x="143" y="182">2주</text><text x="199" y="182">4주</text><text x="254" y="182">8주</text><text x="310" y="182">12주</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="feedList"></div>
